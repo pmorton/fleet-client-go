@@ -64,12 +64,15 @@ type FleetClient interface {
 	Unit(name string) (*schema.Unit, error)
 
 	Submit(name, filePath string) error
-	Start(name string) error
-	Stop(name string) error
+	Start(name []string) error
+	Stop(name []string) error
 	Load(name string) error
-	Destroy(name string) error
+	Unload(name string) error
+	Destroy(name []string) error
 	Status(name string) (*Status, error) // Deprecated, use StatusUnit()
 	StatusUnit(name string) (UnitStatus, error)
+	StatusAll() ([]UnitStatus, error)
+	UnitStatus(name string) (UnitStatus, error)
 }
 
 func NewClient() FleetClient {
